@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #120624;
+  font-family: 'Henny P̦enny', cursive;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  padding-top: 50px;
+}
+
+h1 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.login-box, .signup-box, .write-box {
+  background-color: white;
+  color: black;
+  padding: 30px;
+  border-radius: 10px;
+  width: 320px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+input[type="text"], input[type="password"], input[type="ID"],input[type="email"], input[type="phone"], select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+textarea {
+  height: 120px;
+}
+
+button, .button {
+  background-color: #3f00ff;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Henny Penny', cursive;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+button:hover, .button:hover {
+  background-color: #592eff;
+}
+
+.checkbox-label {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.top-right {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+}
+
+.bottom-center {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 구슬 */
+.shelf {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.orb {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.orb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 20px white;
+}
+
+.joy { background: radial-gradient(circle at 30% 30%, #fff, #ffeb3b); }
+.sadness { background: radial-gradient(circle at 30% 30%, #fff, #2196f3); }
+.anger { background: radial-gradient(circle at 30% 30%, #fff, #f44336); }
+.disgust { background: radial-gradient(circle at 30% 30%, #fff, #4caf50); }
+.fear { background: radial-gradient(circle at 30% 30%, #fff, #9c27b0); }
