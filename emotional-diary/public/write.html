@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <title>Write Diary</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/write.js" defer></script>
 </head>
 <body>
   <div class="container">
     <div class="top-right"><a href="index.html" class="button">Logout</a></div>
     <h1>Emotional Diary</h1>
     <div class="write-box">
-      <label style="font-size:20px;">write things...</label>
-      <textarea placeholder="How was your day?"></textarea>
-      <button style="float:right;">Extract</button>
+      <label style="font-size:20px;">Select date:</label>
+      <input type="date" id="diary-date" />
+      <br /><br />
+    
+      <label style="font-size:20px;">Write things...</label>
+      <textarea id="diary-content" placeholder="How was your day?"></textarea>
+    
+      <button id="extract-btn" style="float:right;">Extract</button>
     </div>
+    
     <div class="bottom-center">
       <a href="main.html" class="button">Back to shelf</a>
     </div>
