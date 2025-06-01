@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS users (
   userId INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   password TEXT NOT NULL,
+  email TEXT NOT NULL,
   phoneNum TEXT,
   birthDate TEXT
 );
