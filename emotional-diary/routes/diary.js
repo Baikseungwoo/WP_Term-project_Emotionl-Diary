@@ -30,4 +30,30 @@ router.post('/diary', async (req, res) => {
   }
 });
 
+router.get('/diary', async (req, res) => {
+    const userId = req.query.userId;
+  
+    if (!userId) {
+      return res.status(400).json({ error: 'Missing userId in query' });
+    }
+  
+    try {
+      const db = await getDBConnection();
+  
+      const result = await db.all(
+        `SELECT diaryId, emotion, keyword1, keyword2, keyword3, date
+         FROM diary
+         WHERE userId = ?
+         ORDER BY date DESC`,
+        [userId]
+      );
+  
+      res.json(result);
+      await db.close();
+    } catch (err) {
+      console.error('❌ Error in listing diaries:', err.message);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
 module.exports = router;
