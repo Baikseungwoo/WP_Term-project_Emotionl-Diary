@@ -1,16 +1,16 @@
-
-const allowedAdmins = ['1', '2', '3']; // 문자열 비교
+const allowedAdmins = ['1', '2', '3'];
 
 document.addEventListener("DOMContentLoaded", () => {
-    const userId = localStorage.getItem("userId");
-    if (!allowedAdmins.includes(userId)) {
-        alert("You are not authorized to view this page.");
-        location.href = "main.html";
-        return;
-    }
+  const userId = localStorage.getItem("userId");
 
-    loadDiaries();
-    loadUsers();
+  if (!userId || userId === "null" || !allowedAdmins.includes(userId)) {
+    alert("You are not authorized to view this page.");
+    location.href = "main.html";
+    return;
+  }
+
+  loadDiaries();
+  loadUsers();
 });
 
 async function loadDiaries() {
