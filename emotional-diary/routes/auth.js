@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const bcrypt = require("bcrypt");
 const { getDBConnection } = require("../models/db");
 
 // Signup
@@ -36,13 +37,16 @@ router.post("/register", async (req, res) => {
                     `);
         }
 
+        // 3. Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         // 3. Insert new user
         await db.run("INSERT INTO users (name, email, password, phoneNum, birthDate) VALUES (?, ?, ?, ?, ?)",
-            [name, email, password, phoneNum, birthDate]);
+            [name, email, hashedPassword, phoneNum, birthDate]);
         await db.close();
 
         // 4. Redirect to login page on success
-        res.redirect("/login.html");
+        res.redirect("/login.html?success=1");
     } catch (err) {
         return res.status(500).send(`
             <script>
@@ -64,7 +68,7 @@ router.post("/login", (req, res, next) => {
 
       req.session.userId = user.userId;
 
-      // ✅ Only send userId in the response
+      // Only send userId in the response
       return res.json({ userId: user.userId });
     });
   })(req, res, next);
