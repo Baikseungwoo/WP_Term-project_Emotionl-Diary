@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getDBConnection } = require('../models/db');
-const { analyzeDiary } = require('../services/openai');
+const { analyzeEmotion } = require('../services/openai');
 
 router.post('/diary', async (req, res) => {
   const { userId, date, content } = req.body;
@@ -12,7 +12,7 @@ router.post('/diary', async (req, res) => {
 
   try {
     // contract with OpenAI API to analyze diary content
-    const { keywords, emotion } = await analyzeDiary(content);
+    const { keywords, emotion } = await analyzeEmotion(content);
 
     // DB saving
     const db = await getDBConnection();

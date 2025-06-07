@@ -32,6 +32,9 @@ app.use(passport.session());
 const authRoutes = require("./routes/auth");
 app.use("/", authRoutes);
 
+const diaryRoutes = require("./routes/diary");
+app.use("/api", diaryRoutes);
+
 // Serve the default welcome page
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));

@@ -112,8 +112,15 @@ button:hover, .button:hover {
   box-shadow: 0 0 20px white;
 }
 
+.orb.empty {
+  background: radial-gradient(circle at 30% 30%, #fff, #000); /* 검은 구슬 */
+}
+
 .joy { background: radial-gradient(circle at 30% 30%, #fff, #ffeb3b); }
 .sadness { background: radial-gradient(circle at 30% 30%, #fff, #2196f3); }
 .anger { background: radial-gradient(circle at 30% 30%, #fff, #f44336); }
 .disgust { background: radial-gradient(circle at 30% 30%, #fff, #4caf50); }
 .fear { background: radial-gradient(circle at 30% 30%, #fff, #9c27b0); }
+.bored {background: radial-gradient(circle at 30% 30%, #fff, #9e9e9e); /* gray */}
+.anxiety {background: radial-gradient(circle at 30% 30%, #fff, #607d8b); /* blue-gray */}
+.calm {background: radial-gradient(circle at 30% 30%, #fff, #00bcd4); /* teal/lightblue */}
