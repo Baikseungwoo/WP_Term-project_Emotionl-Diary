@@ -1,11 +1,9 @@
-const { Configuration, OpenAIApi } = require("openai");
+const OpenAI = require('openai');
+require('dotenv').config();
 
-// Load API key from environment variable
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
-const openai = new OpenAIApi(configuration);
 
 /**
  * Analyze diary content using OpenAI and return emotion + 3 keywords
@@ -15,7 +13,7 @@ const openai = new OpenAIApi(configuration);
 exports.analyzeEmotion = async (content) => {
   const prompt = `
 Analyze the following diary entry and extract:
-- One emotion from this list: Joy, sadness, anger, bored, fear, disguest, anxiety, calm
+- One emotion from this list: Joy, sadness, anger, bored, fear, disgust, anxiety, calm
 - Three representative keywords
 
 Return ONLY JSON in this format:
@@ -29,16 +27,16 @@ ${content}
 `;
 
   try {
-    const res = await openai.createChatCompletion({
+    const res = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
     });
 
-    const responseText = res.data.choices[0].message.content;
+    const responseText = res.choices[0].message.content;
     return JSON.parse(responseText);
   } catch (error) {
-    console.error("OpenAI API error:", error);
-    throw new Error("Failed to analyze diary content with OpenAI.");
+    console.error("❌ OpenAI API error:", error.message);
+    throw new Error("Failed to analyze diary content.");
   }
 };
