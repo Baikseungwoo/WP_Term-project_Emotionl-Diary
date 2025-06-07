@@ -1,6 +1,7 @@
 // tests/auth.test.js
 const request = require('supertest');
 const app = require('../app');
+const passport = require('passport');
 
 jest.mock('../models/db', () => {
   let db = {
@@ -15,18 +16,17 @@ jest.mock('../models/db', () => {
   };
 });
 
-// passport mock
-jest.mock('passport', () => {
-  return {
-    authenticate: (strategy, callback) => (req, res, next) => {
+jest.spyOn(passport, 'authenticate').mockImplementation(() => {
+    return (req, res, next) => {
       if (req.body.email === 'fail@example.com') {
-        callback(null, false, { message: 'Invalid credentials' });
+        return res.status(401).send("Unauthorized");
       } else {
-        callback(null, { userId: 1 }, null); // 성공 케이스
+        req.logIn({ userId: 1 }, () => {
+          return res.json({ userId: 1 });
+        });
       }
-    }
-  };
-});
+    };
+  });
 
 const { __mockDB } = require('../models/db');
 
