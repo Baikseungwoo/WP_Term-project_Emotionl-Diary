@@ -40,6 +40,12 @@ textarea {
   height: 120px;
 }
 
+i{
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
+}
+
 button, .button {
   background-color: #3f00ff;
   color: white;

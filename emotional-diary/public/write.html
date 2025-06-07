@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Write Diary</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/write.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+
 <body>
+  <audio id="bgm" src="audio/bundle_of_joy.mp3" autoplay loop></audio>
   <div class="container">
     <div class="top-right"><a href="index.html" class="button">Logout</a></div>
     <h1>Emotional Diary</h1>
@@ -14,23 +18,37 @@
       <label style="font-size:20px;">Select date:</label>
       <input type="date" id="diary-date" />
       <br /><br />
-    
+
       <label style="font-size:20px;">Write things...</label>
       <textarea id="diary-content" placeholder="How was your day?"></textarea>
-    
+
       <button id="extract-btn" style="float:right;">Extract</button>
     </div>
-    
+
     <div class="bottom-center">
       <a href="main.html" class="button">Back to shelf</a>
     </div>
   </div>
-  <img src="images/sound_icon.png" class="bottom-right" onclick="toggleSound()">
+  <!-- <img src="images/sound_icon.png" class="bottom-right" onclick="toggleSound()"> -->
+  <i id="sound-toggle" class="fa-solid fa-volume-high bottom-right" onclick="toggleSound()"></i>
   <script>
     function toggleSound() {
       const bgm = document.getElementById("bgm");
+      const icon = document.getElementById("sound-toggle");
+
+      if (!bgm || !icon) return;
+
       bgm.muted = !bgm.muted;
+
+      if (bgm.muted) {
+        icon.classList.remove("fa-volume-high");
+        icon.classList.add("fa-volume-xmark");
+      } else {
+        icon.classList.remove("fa-volume-xmark");
+        icon.classList.add("fa-volume-high");
+      }
     }
   </script>
 </body>
+
 </html>

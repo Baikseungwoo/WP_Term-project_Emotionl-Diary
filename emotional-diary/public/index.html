@@ -4,8 +4,10 @@
   <meta charset="UTF-8" />
   <title>Emotional Diary</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
+  <audio id="bgm" src="audio/bundle_of_joy.mp3" autoplay loop></audio>
   <div class="container">
     <h1>Emotional Diary</h1>
     <img src="images/main_characters.png" alt="Inside Out Characters" style="width: 500px;" />
@@ -13,14 +15,27 @@
       <a href="login.html" class="button">Login</a>
     </div>
   </div>
-  <img src="images/sound_icon.png" class="bottom-right" onclick="toggleSound()" />
-  <audio id="bgm" autoplay loop>
+  <!-- <img src="images/sound_icon.png" class="bottom-right" onclick="toggleSound()" /> -->
+  <i id="sound-toggle" class="fa-solid fa-volume-high bottom-right" onclick="toggleSound()"></i>
+  <!-- <audio id="bgm" autoplay loop>
     <source src="audio/inside_out_theme.mp3" type="audio/mpeg" />
-  </audio>
+  </audio> -->
   <script>
     function toggleSound() {
       const bgm = document.getElementById("bgm");
+      const icon = document.getElementById("sound-toggle");
+
+      if (!bgm || !icon) return;
+
       bgm.muted = !bgm.muted;
+
+      if (bgm.muted) {
+        icon.classList.remove("fa-volume-high");
+        icon.classList.add("fa-volume-xmark");
+      } else {
+        icon.classList.remove("fa-volume-xmark");
+        icon.classList.add("fa-volume-high");
+      }
     }
   </script>
 </body>
