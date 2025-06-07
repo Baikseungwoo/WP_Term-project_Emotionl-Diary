@@ -21,6 +21,13 @@
     <source src="audio/inside_out_theme.mp3" type="audio/mpeg" />
   </audio> -->
   <script>
+    window.addEventListener("click", () => {
+      const bgm = document.getElementById("bgm");
+      if (bgm && bgm.paused) {
+        bgm.play().catch(err => console.warn("Autoplay blocked:", err));
+      }
+    }, { once: true });
+
     function toggleSound() {
       const bgm = document.getElementById("bgm");
       const icon = document.getElementById("sound-toggle");
