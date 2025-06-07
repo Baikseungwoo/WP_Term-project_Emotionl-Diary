@@ -1,4 +1,5 @@
 const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 const { getDBConnection } = require("../models/db");
 
 // Export a function to configure Passport.js
@@ -20,8 +21,10 @@ module.exports = function (passport) {
       // If no user found, fail authentication
       if (!user) return done(null, false, { message: "No user" });
 
-      // If password does not match, fail authentication
-      if (user.password !== password) return done(null, false, { message: "Wrong password" });
+      // Compare Hash password: If password does not match, fail authentication
+      const isMatch = await bcrypt.compare(password, user.password); // 🔐 해시 비교
+      if (!isMatch) return done(null, false, { message: "Wrong password" });
+      // if (user.password !== password) return done(null, false, { message: "Wrong password" });
 
       // Success: pass the user object to next step
       return done(null, user);
