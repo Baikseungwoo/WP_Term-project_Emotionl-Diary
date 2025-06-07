@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Main</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <div class="container">
     <div class="top-right"><a href="/logout" class="button">Logout</a></div>
@@ -22,10 +24,30 @@
   </div>
   <img src="images/sound_icon.png" class="bottom-right" onclick="toggleSound()">
   <script>
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      alert("Please log in first.");
+      window.location.href = "/login.html";
+    }
+
+    function handleLogout() {
+      fetch("/logout")  // Terminate the session on the server
+        .then(() => {
+          localStorage.removeItem("user");  // Remove user info from localStorage
+          window.location.href = "/index.html?logout=1";  // Redirect to homepage with logout flag
+        })
+        .catch(err => {
+          console.error("Logout failed:", err);
+          alert("Logout failed.");
+        });
+    }
+
     function toggleSound() {
       const bgm = document.getElementById("bgm");
       bgm.muted = !bgm.muted;
     }
   </script>
 </body>
+
 </html>

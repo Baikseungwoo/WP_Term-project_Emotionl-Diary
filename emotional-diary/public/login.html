@@ -10,7 +10,7 @@
 <body>
   <div class="container">
     <h1>Emotional Diary</h1>
-    <form action="/login" method="post" class="login-box">
+    <form id="login-form" class="login-box">
       <h2 style="color: #6a00ff;">Login</h2>
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
@@ -24,6 +24,32 @@
   </div>
   <img src="images/sound_icon.png" class="bottom-right" onclick="toggleSound()" />
   <script>
+    document.getElementById("login-form").addEventListener("submit", async function (e) {
+      e.preventDefault(); // prevent default form submission
+
+      const formData = new FormData(this);
+      const data = new URLSearchParams(formData);
+
+      try {
+        const res = await fetch("/login", {
+          method: "POST",
+          body: data,
+          credentials: "include"
+        });
+
+        if (res.ok) {
+          const { userId } = await res.json(); // only userId
+          localStorage.setItem("userId", userId);
+          window.location.href = "/main.html";
+        } else {
+          alert("Login failed: Wrong email or password.");
+        }
+      } catch (err) {
+        console.error("Login error:", err);
+        alert("Login failed: Server error.");
+      }
+    });
+
     const params = new URLSearchParams(window.location.search);
     if (params.get("error") === "1") {
       alert("Login Failed: wrong email or password");

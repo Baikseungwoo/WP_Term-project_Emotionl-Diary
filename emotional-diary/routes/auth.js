@@ -54,9 +54,18 @@ router.post("/register", async (req, res) => {
 });
 
 // Login
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/main.html",
-    failureRedirect: "/login.html?error=1"
-}));
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) return next(err);
+    if (!user) return res.status(401).send("Unauthorized");
+
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+
+      // ✅ Only send userId in the response
+      return res.json({ userId: user.userId });
+    });
+  })(req, res, next);
+});
 
 module.exports = router;
