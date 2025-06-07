@@ -151,13 +151,3 @@ button:hover, .button:hover {
 .bored    { background: radial-gradient(circle at 30% 30%, #fff, #9e9e9e); }
 .anxiety  { background: radial-gradient(circle at 30% 30%, #fff, #607d8b); }
 .calm     { background: radial-gradient(circle at 30% 30%, #fff, #00bcd4); }
-
-/* 원형 배치: 45도 간격 */
-.orb:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg)   translate(120px) rotate(0deg); }
-.orb:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg)  translate(120px) rotate(-45deg); }
-.orb:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg)  translate(120px) rotate(-90deg); }
-.orb:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translate(120px) rotate(-135deg); }
-.orb:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translate(120px) rotate(-180deg); }
-.orb:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translate(120px) rotate(-225deg); }
-.orb:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translate(120px) rotate(-270deg); }
-.orb:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translate(120px) rotate(-315deg); }
