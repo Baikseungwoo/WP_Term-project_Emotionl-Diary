@@ -58,9 +58,10 @@ app.get("/logout", (req, res) => {
             return res.status(500).send("Logout failed");
         }
         req.session.destroy(() => {
+            res.clearCookie('connect.sid');
             res.redirect("/index.html?logout=1");
         });
     });
 });
 
-module.exports = app; // ⭐️ 핵심
+module.exports = app; 
