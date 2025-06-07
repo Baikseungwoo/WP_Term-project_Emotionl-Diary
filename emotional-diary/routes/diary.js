@@ -3,6 +3,8 @@ const router = express.Router();
 const { getDBConnection } = require('../models/db');
 const { analyzeEmotion } = require('../services/openai');
 const { body, validationResult } = require("express-validator");
+const { query } = require('express-validator');
+
 
 router.post('/diary', [
   body('userId').isInt().withMessage('userId must be an integer'),
