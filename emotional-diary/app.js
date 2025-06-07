@@ -31,10 +31,24 @@ app.use("/api", diaryRoutes);
 const adminRoutes = require('./routes/admin');
 app.use('/api', adminRoutes); 
 
+const sessionRoutes = require("./routes/session");
+app.use("/api", sessionRoutes); 
+
 // Default route
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+app.get("/admin.html", (req, res) => {
+    const allowedAdmins = ['1', '2', '3'];
+    const userId = String(req.session?.userId || "");
+  
+    if (!allowedAdmins.includes(userId)) {
+      return res.redirect("/index.html");
+    }
+  
+    res.sendFile(path.join(__dirname, "public", "admin.html"));
+  });
 
 // Logout
 app.get("/logout", (req, res) => {

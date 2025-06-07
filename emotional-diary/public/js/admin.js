@@ -1,18 +1,28 @@
-const allowedAdmins = ['1', '2', '3'];
-
-document.addEventListener("DOMContentLoaded", () => {
-  const userId = localStorage.getItem("userId");
-
-  if (!userId || userId === "null" || !allowedAdmins.includes(userId)) {
-    alert("You are not authorized to view this page.");
-    location.href = "main.html";
-    return;
-  }
-
-  loadDiaries();
-  loadUsers();
-});
-
+document.addEventListener("DOMContentLoaded", async () => {
+    const allowedAdmins = ['1', '2', '3'];
+  
+    try {
+      const res = await fetch("/api/session/user");
+      if (!res.ok) throw new Error("Unauthorized");
+  
+      const data = await res.json();
+      const userId = data.userId;
+  
+      if (!allowedAdmins.includes(userId)) {
+        alert("You are not authorized to view this page.");
+        location.href = "main.html";
+        return;
+      }
+  
+      
+      loadDiaries();
+      loadUsers();
+  
+    } catch (err) {
+      alert("You must be logged in to view this page.");
+      location.href = "login.html";
+    }
+  });
 async function loadDiaries() {
     try {
         const res = await fetch('/api/admin/diary');
