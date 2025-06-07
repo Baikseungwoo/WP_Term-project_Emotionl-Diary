@@ -1,3 +1,4 @@
+// app.js
 const express = require('express');
 const session = require("express-session");
 const passport = require("passport");
@@ -7,45 +8,30 @@ require("dotenv").config();
 require("./server/passport")(passport); // Load passport strategy
 
 const app = express();
-const PORT = process.env.PORT || 8080;
 
-// Serve static files from public/
+// Middlewares
 app.use(express.static(path.join(__dirname, 'public')));
-
-// Parse form data 
 app.use(express.urlencoded({ extended: true }));
-// Parse JSON data 
 app.use(express.json());
-
-// Session configuration
 app.use(session({
     secret: "emotion-secret-key",
     resave: false,
     saveUninitialized: false
 }));
-
-// Initialize passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Connect authentication routes
+// Routes
 const authRoutes = require("./routes/auth");
 app.use("/", authRoutes);
 
 const diaryRoutes = require("./routes/diary");
 app.use("/api", diaryRoutes);
 
-// Serve the default welcome page
+// Default route
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-
-// Start the server
-app.listen(PORT, () => {
-    console.log(`✅ Server running at http://localhost:${PORT}`);
-});
-
-// Login
 
 // Logout
 app.get("/logout", (req, res) => {
@@ -59,3 +45,5 @@ app.get("/logout", (req, res) => {
         });
     });
 });
+
+module.exports = app; // ⭐️ 핵심
