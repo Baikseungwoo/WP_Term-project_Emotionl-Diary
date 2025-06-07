@@ -22,7 +22,7 @@ router.post("/register",
 async (req, res) => {
     const { name, email, password, confirm, phoneNum, birthDate } = req.body;
 
-    // 로그 출력
+
     console.log("📩 Received data:", req.body);
 
     // 1. Check if passwords match
@@ -85,10 +85,13 @@ router.post("/login",
     req.logIn(user, (err) => {
       if (err) return next(err);
 
+      req.session.userId = user.userId;
+
       // Only send userId in the response
       return res.json({ userId: user.userId });
     });
   })(req, res, next);
 });
+
 
 module.exports = router;
