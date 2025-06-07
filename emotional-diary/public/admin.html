@@ -16,14 +16,12 @@
   </table>
 
   <h2>👤 Registered Users</h2>
-  <table id="user-table">
-    <thead>
-      <tr>
-        <th>User ID</th><th>Email</th><th>Nickname</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+<table id="user-table">
+  <thead>
+    <tr id="user-header-row"></tr>
+  </thead>
+  <tbody></tbody>
+</table>
 
   <script>
     const allowedAdmins = ['1', '2', '3']; // 문자열 비교
@@ -63,24 +61,38 @@
     }
 
     async function loadUsers() {
-      try {
-        const res = await fetch('/api/admin/users');
-        const data = await res.json();
-        const tbody = document.querySelector('#user-table tbody');
-        data.forEach(user => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${user.userId}</td>
-            <td>${user.email}</td>
-            <td>${user.nickname}</td>
-          `;
-          tbody.appendChild(row);
-        });
-      } catch (err) {
-        alert("Failed to load user list.");
-        console.error(err);
+    try {
+      const res = await fetch('/api/admin/users');
+      const users = await res.json();
+
+      if (users.length === 0) {
+        document.querySelector('#user-table tbody').innerHTML = '<tr><td colspan="99">No users found.</td></tr>';
+        return;
       }
+
+      const headerRow = document.querySelector("#user-header-row");
+      const firstUser = users[0];
+      Object.keys(firstUser).forEach(col => {
+        const th = document.createElement("th");
+        th.textContent = col;
+        headerRow.appendChild(th);
+      });
+
+      const tbody = document.querySelector('#user-table tbody');
+      users.forEach(user => {
+        const row = document.createElement('tr');
+        Object.values(user).forEach(value => {
+          const td = document.createElement("td");
+          td.textContent = value;
+          row.appendChild(td);
+        });
+        tbody.appendChild(row);
+      });
+    } catch (err) {
+      alert("Failed to load user list.");
+      console.error(err);
     }
+  }
   </script>
 </body>
 </html>
