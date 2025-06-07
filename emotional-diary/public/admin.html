@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<h1>📘 Diary Entries (Admin View)</h1>
+  <table id="diary-table">
+    <thead>
+      <tr>
+        <th>ID</th><th>User</th><th>Emotion</th><th>Keywords</th><th>Date</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <h2>👤 Registered Users</h2>
+  <table id="user-table">
+    <thead>
+      <tr>
+        <th>User ID</th><th>Email</th><th>Nickname</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const allowedAdmins = ['1', '2', '3']; // 문자열 비교
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const userId = localStorage.getItem("userId");
+      if (!allowedAdmins.includes(userId)) {
+        alert("You are not authorized to view this page.");
+        location.href = "main.html";
+        return;
+      }
+
+      loadDiaries();
+      loadUsers();
+    });
+
+    async function loadDiaries() {
+      try {
+        const res = await fetch('/api/admin/diary');
+        const data = await res.json();
+        const tbody = document.querySelector('#diary-table tbody');
+        data.forEach(entry => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${entry.diaryId}</td>
+            <td>${entry.userId}</td>
+            <td>${entry.emotion}</td>
+            <td>${entry.keyword1}, ${entry.keyword2}, ${entry.keyword3}</td>
+            <td>${entry.date}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        alert("Failed to load diary entries.");
+        console.error(err);
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const res = await fetch('/api/admin/users');
+        const data = await res.json();
+        const tbody = document.querySelector('#user-table tbody');
+        data.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${user.userId}</td>
+            <td>${user.email}</td>
+            <td>${user.nickname}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (err) {
+        alert("Failed to load user list.");
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

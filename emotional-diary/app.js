@@ -28,6 +28,9 @@ app.use("/", authRoutes);
 const diaryRoutes = require("./routes/diary");
 app.use("/api", diaryRoutes);
 
+const adminRoutes = require('./routes/admin');
+app.use('/api', adminRoutes); 
+
 // Default route
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
