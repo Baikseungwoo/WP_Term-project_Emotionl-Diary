@@ -4,7 +4,8 @@ const sqlite3 = require('sqlite3');
 const sqlite = require('sqlite');
 
 // path setting
-const DB_PATH = path.join(__dirname, 'db/emotional-diary.db');
+
+const DB_PATH = path.join(__dirname, 'db/emotional_diary.db');
 const SCHEMA_PATH = path.join(__dirname, 'db/schema.sql');
 
 async function initDB() {
