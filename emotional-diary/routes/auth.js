@@ -10,7 +10,7 @@ router.post("/register", async (req, res) => {
     // 로그 출력
     console.log("📩 Received data:", req.body);
 
-    // Password confirmation check
+    // 1. Check if passwords match
     if (password !== confirm) {
         res.send(`
             <script>
@@ -22,14 +22,31 @@ router.post("/register", async (req, res) => {
 
     try {
         const db = await getDBConnection();
+
+        // 2. Check if email already exists
+        const existingUser = await db.get("SELECT * FROM users WHERE email = ?", [email]);
+
+        if (existingUser) {
+            await db.close();
+            return res.send(`
+                        <script>
+                            alert("Email already registered. Please use another email.");
+                            window.location.href = "/register.html";
+                        </script>
+                    `);
+        }
+
+        // 3. Insert new user
         await db.run("INSERT INTO users (name, email, password, phoneNum, birthDate) VALUES (?, ?, ?, ?, ?)",
             [name, email, password, phoneNum, birthDate]);
         await db.close();
+
+        // 4. Redirect to login page on success
         res.redirect("/login.html");
     } catch (err) {
         return res.status(500).send(`
             <script>
-                alert("Signup Failed (Server Error)");
+                alert("Signup Failed (Server Error): ${err.message}");
                 window.location.href = "/signup.html";
             </script>
         `);

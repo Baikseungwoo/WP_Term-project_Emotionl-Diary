@@ -3,7 +3,7 @@ const sqlite = require('sqlite');
 const path = require('path');
 require('dotenv').config();
 
-const dbPath = process.env.DB_PATH || path.join(__dirname, '../db/users.db');
+const dbPath = process.env.DB_PATH || path.join(__dirname, '../db/emotional-diary.db');
 
 async function getDBConnection() {
   const db = await sqlite.open({
