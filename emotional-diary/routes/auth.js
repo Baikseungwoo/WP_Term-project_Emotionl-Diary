@@ -8,8 +8,10 @@ const { getDBConnection } = require("../models/db");
 router.post("/register", async (req, res) => {
     const { name, email, password, confirm, phoneNum, birthDate } = req.body;
 
-    // 로그 출력
-    console.log("📩 Received data:", req.body);
+    // Log received form data for debugging (email, password, etc.)
+    if (process.env.NODE_ENV !== 'production') {
+        console.log("📩 Received data:", req.body);
+    }
 
     // 1. Check if passwords match
     if (password !== confirm) {
@@ -40,12 +42,12 @@ router.post("/register", async (req, res) => {
         // 3. Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // 3. Insert new user
+        // 4. Insert new user
         await db.run("INSERT INTO users (name, email, password, phoneNum, birthDate) VALUES (?, ?, ?, ?, ?)",
             [name, email, hashedPassword, phoneNum, birthDate]);
         await db.close();
 
-        // 4. Redirect to login page on success
+        // 5. Redirect to login page on success
         res.redirect("/login.html?success=1");
     } catch (err) {
         return res.status(500).send(`
