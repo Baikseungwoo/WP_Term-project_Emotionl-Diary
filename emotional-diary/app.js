@@ -59,10 +59,15 @@ app.get("/logout", (req, res) => {
             return res.status(500).send("Logout failed");
         }
         req.session.destroy(() => {
+            res.clearCookie('connect.sid');
             res.redirect("/index.html?logout=1");
         });
     });
 });
 
+<<<<<<< HEAD
 // ⭐️ Export the configured Express app so it can be used in server.js
 module.exports = app;
+=======
+module.exports = app; 
+>>>>>>> 188293590268353f229e668ae1bdba4a90fa849a

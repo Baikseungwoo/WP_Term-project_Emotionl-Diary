@@ -2,8 +2,16 @@ const express = require('express');
 const router = express.Router();
 const { getDBConnection } = require('../models/db');
 const { analyzeEmotion } = require('../services/openai');
+const { body, validationResult } = require("express-validator");
+const { query } = require('express-validator');
 
-router.post('/diary', async (req, res) => {
+
+router.post('/diary', [
+  body('userId').isInt().withMessage('userId must be an integer'),
+  body('date').isISO8601().withMessage('date must be in YYYY-MM-DD format'),
+  body('content').trim().notEmpty().withMessage('content is required')
+], // express-validator to secure input validation
+ async (req, res) => {
   const { userId, date, content } = req.body;
 
   if (!userId || !date || !content) {
@@ -30,7 +38,11 @@ router.post('/diary', async (req, res) => {
   }
 });
 
-router.get('/diary', async (req, res) => {
+router.get('/diary',
+[
+  query('userId').isInt().withMessage('userId must be an integer')
+], // express-validator to secure input validation
+async (req, res) => {
     const userId = req.query.userId;
   
     if (!userId) {
