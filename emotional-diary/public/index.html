@@ -6,14 +6,36 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    .orb:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg)   translate(120px) rotate(0deg); }
-    .orb:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg)  translate(120px) rotate(-45deg); }
-    .orb:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg)  translate(120px) rotate(-90deg); }
-    .orb:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translate(120px) rotate(-135deg); }
-    .orb:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translate(120px) rotate(-180deg); }
-    .orb:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translate(120px) rotate(-225deg); }
-    .orb:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translate(120px) rotate(-270deg); }
-    .orb:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translate(120px) rotate(-315deg); }
+    .orb-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 40px auto;
+    }
+
+    .orb {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+
+    .orb:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 20px white;
+    }
+
+    .orb:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg)   translate(120px) rotate(0deg); top: 50%; left: 50%; }
+    .orb:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg)  translate(120px) rotate(-45deg); top: 50%; left: 50%; }
+    .orb:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg)  translate(120px) rotate(-90deg); top: 50%; left: 50%; }
+    .orb:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translate(120px) rotate(-135deg); top: 50%; left: 50%; }
+    .orb:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translate(120px) rotate(-180deg); top: 50%; left: 50%; }
+    .orb:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translate(120px) rotate(-225deg); top: 50%; left: 50%; }
+    .orb:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translate(120px) rotate(-270deg); top: 50%; left: 50%; }
+    .orb:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translate(120px) rotate(-315deg); top: 50%; left: 50%; }
   </style>
   
   <script src="js/common.js"></script>
