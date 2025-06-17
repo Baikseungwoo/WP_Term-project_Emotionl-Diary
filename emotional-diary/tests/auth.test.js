@@ -12,7 +12,7 @@ jest.mock('../models/db', () => {
 
   return {
     getDBConnection: jest.fn(() => Promise.resolve(db)),
-    __mockDB: db  // 내부에서 설정 바꾸기 위해 export
+    __mockDB: db  
   };
 });
 
