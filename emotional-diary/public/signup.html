@@ -12,7 +12,7 @@
   <div class="container">
     <h1>Emotional Diary</h1>
     <form action="/register" method="post" class="signup-box">
-      <h3>Sign up</h3>
+      <h2 style="color: #6a00ff;">Sign up</h2>
       <input type="text" name="name" placeholder="Enter your name" required />
       <input type="email" name="email" placeholder="Email address" required />
       <input type="password" name="password" placeholder="Password" required />
@@ -22,7 +22,8 @@
 
       <button type="submit">Sign up</button>
 
-      <p><a href="login.html">Login</a></p>
+      <button class="login" type="button" onclick="location.href='login.html'">Login</button>
+      <!-- <p><a href="login.html">Login</a></p> -->
     </form>
   </div>
   <i id="sound-toggle" class="fa-solid fa-volume-high bottom-right" onclick="toggleSound()"></i>
