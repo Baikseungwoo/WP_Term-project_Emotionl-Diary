@@ -65,9 +65,7 @@ app.get("/logout", (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-// ⭐️ Export the configured Express app so it can be used in server.js
+
 module.exports = app;
-=======
-module.exports = app; 
->>>>>>> 188293590268353f229e668ae1bdba4a90fa849a
+
+
