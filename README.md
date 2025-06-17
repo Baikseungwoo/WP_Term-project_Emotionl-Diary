@@ -27,7 +27,7 @@ The emotions are visualized as colored orbs, and users can track their emotional
 | Frontend     | HTML, CSS, JavaScript (Vanilla)    |
 | Backend      | Node.js, Express                   |
 | Database     | SQLite3                            |
-| Authentication | Passport.js (LocalStrategy)     |
+| Authentication | Passport.js (LocalStrategy), session    |
 | Emotion Analysis | OpenAI GPT API                 |
 | Testing      | Jest, Supertest                    |
 
@@ -100,12 +100,16 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 node server.js
 ```
-4. visit the app in your browser
+4. visit the app in your local
 ```
 http://localhost:8080
 ```
+5. visit the live app in browser
 
-🌐 The app should now be running locally.
+- Visit Emotional Diary: [https://emotionl-diary.onrender.com](https://emotionl-diary.onrender.com)
+
+
+🌐 You can access our app in internet now.
 
 
 ## 🔐 Environment Variables

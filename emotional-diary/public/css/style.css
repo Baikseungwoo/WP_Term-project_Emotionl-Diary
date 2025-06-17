@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
 
+*{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -23,12 +27,28 @@ h1 {
   color: black;
   padding: 30px;
   border-radius: 10px;
-  width: 320px;
+  width: 480px;
   margin: 0 auto;
   text-align: left;
 }
 
-input[type="text"], input[type="password"], input[type="ID"],input[type="email"], input[type="phone"], select, textarea {
+.login-box p {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.login-box p a{
+  margin-left: 10px;
+  color: black;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-box p a:hover{
+  text-decoration: underline;
+}
+
+input[type="text"], input[type="password"], input[type="ID"],input[type="email"], input[type="tel"], input[type="date"], select, textarea {
   width: 100%;
   padding: 10px;
   margin: 8px 0;
@@ -49,6 +69,7 @@ i{
 button, .button {
   background-color: #3f00ff;
   color: white;
+  width: 100%;
   border: none;
   padding: 12px 24px;
   font-size: 16px;
@@ -59,8 +80,19 @@ button, .button {
   text-decoration: none;
 }
 
+button.login {
+  background-color: white;
+  color: #000;
+  border: 3px solid #3f00ff;
+}
+
 button:hover, .button:hover {
   background-color: #592eff;
+}
+
+button.login:hover{
+  background-color: white;
+  border-color: #6329FF;
 }
 
 .checkbox-label {
