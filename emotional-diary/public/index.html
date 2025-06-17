@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>Emotional Diary</title>
@@ -28,18 +29,58 @@
       box-shadow: 0 0 20px white;
     }
 
-    .orb:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg)   translate(120px) rotate(0deg); top: 50%; left: 50%; }
-    .orb:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg)  translate(120px) rotate(-45deg); top: 50%; left: 50%; }
-    .orb:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg)  translate(120px) rotate(-90deg); top: 50%; left: 50%; }
-    .orb:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg) translate(120px) rotate(-135deg); top: 50%; left: 50%; }
-    .orb:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg) translate(120px) rotate(-180deg); top: 50%; left: 50%; }
-    .orb:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg) translate(120px) rotate(-225deg); top: 50%; left: 50%; }
-    .orb:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg) translate(120px) rotate(-270deg); top: 50%; left: 50%; }
-    .orb:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg) translate(120px) rotate(-315deg); top: 50%; left: 50%; }
+    .orb:nth-child(1) {
+      transform: translate(-50%, -50%) rotate(0deg) translate(120px) rotate(0deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(2) {
+      transform: translate(-50%, -50%) rotate(45deg) translate(120px) rotate(-45deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(3) {
+      transform: translate(-50%, -50%) rotate(90deg) translate(120px) rotate(-90deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(4) {
+      transform: translate(-50%, -50%) rotate(135deg) translate(120px) rotate(-135deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(5) {
+      transform: translate(-50%, -50%) rotate(180deg) translate(120px) rotate(-180deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(6) {
+      transform: translate(-50%, -50%) rotate(225deg) translate(120px) rotate(-225deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(7) {
+      transform: translate(-50%, -50%) rotate(270deg) translate(120px) rotate(-270deg);
+      top: 50%;
+      left: 50%;
+    }
+
+    .orb:nth-child(8) {
+      transform: translate(-50%, -50%) rotate(315deg) translate(120px) rotate(-315deg);
+      top: 50%;
+      left: 50%;
+    }
   </style>
-  
+
   <script src="js/common.js"></script>
 </head>
+
 <body>
   <audio id="bgm" src="audio/emotional-piano-music.mp3" autoplay loop></audio>
   <div class="container">
@@ -57,13 +98,13 @@
       <div class="orb anxiety"></div>
       <div class="orb calm"></div>
     </div>
-  <br>
-  <br>
-  <br>
+    <br>
+    <br>
+    <br>
     <div>
       <a href="login.html" class="button">Login</a>
     </div>
-  </div>  
+  </div>
   </div>
   <i id="sound-toggle" class="fa-solid fa-volume-high bottom-right" onclick="toggleSound()"></i>
   <script>
@@ -74,23 +115,43 @@
       }
     }, { once: true });
 
+    window.addEventListener("DOMContentLoaded", () => {
+      const bgm = document.getElementById("bgm");
+      const icon = document.getElementById("sound-toggle");
+
+      const isMuted = localStorage.getItem("bgm-muted") === "true";
+
+      if (bgm) {
+        bgm.muted = isMuted;
+        bgm.loop = true;
+        bgm.play().catch(err => console.warn("Autoplay blocked:", err));
+      }
+
+      if (icon) {
+        updateIcon(isMuted);
+      }
+    });
+
     function toggleSound() {
       const bgm = document.getElementById("bgm");
       const icon = document.getElementById("sound-toggle");
 
       if (!bgm || !icon) return;
 
-      bgm.muted = !bgm.muted;
+      const newMuted = !bgm.muted;
+      bgm.muted = newMuted;
+      localStorage.setItem("bgm-muted", newMuted);
 
-      if (bgm.muted) {
-        icon.classList.remove("fa-volume-high");
-        icon.classList.add("fa-volume-xmark");
-      } else {
-        icon.classList.remove("fa-volume-xmark");
-        icon.classList.add("fa-volume-high");
-      }
+      updateIcon(newMuted);
+    }
+
+    function updateIcon(muted) {
+      const icon = document.getElementById("sound-toggle");
+      if (!icon) return;
+      icon.classList.remove("fa-volume-high", "fa-volume-xmark");
+      icon.classList.add(muted ? "fa-volume-xmark" : "fa-volume-high");
     }
   </script>
-  
 </body>
+
 </html>

@@ -2,7 +2,9 @@
 const request = require('supertest');
 const app = require('../app');
 
+
 // Mock the OpenAI emotion analysis service
+
 jest.mock('../services/openai', () => ({
   analyzeEmotion: jest.fn(() => ({
     keywords: ['sun', 'happy', 'joy'],
@@ -42,6 +44,7 @@ describe('Diary API Test Suite', () => {
       const res = await request(app).post('/api/diary').send({
         userId: 1,
         content: 'Today was great!'
+        // no date
       });
 
       expect(res.statusCode).toBe(400);

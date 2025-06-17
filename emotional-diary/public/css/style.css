@@ -120,7 +120,7 @@ button.login:hover{
   transform: translateX(-50%);
 }
 
-/* 구슬 */
+/* orb */
 .shelf {
   display: flex;
   flex-wrap: wrap;
@@ -148,7 +148,7 @@ button.login:hover{
   background: radial-gradient(circle at 30% 30%, #fff, #000); /* 검은 구슬 */
 }
 
-/* 감정별 색상 */
+/* emotion color */
 .joy      { background: radial-gradient(circle at 30% 30%, #fff, #ffeb3b); }
 .sadness  { background: radial-gradient(circle at 30% 30%, #fff, #2196f3); }
 .anger    { background: radial-gradient(circle at 30% 30%, #fff, #f44336); }

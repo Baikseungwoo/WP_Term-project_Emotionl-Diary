@@ -22,7 +22,7 @@ module.exports = function (passport) {
       if (!user) return done(null, false, { message: "No user" });
 
       // Compare Hash password: If password does not match, fail authentication
-      const isMatch = await bcrypt.compare(password, user.password); // 🔐 해시 비교
+      const isMatch = await bcrypt.compare(password, user.password); 
       if (!isMatch) return done(null, false, { message: "Wrong password" });
       // if (user.password !== password) return done(null, false, { message: "Wrong password" });
 
