@@ -18,9 +18,6 @@
       <h2 style="color: #6a00ff;">Login</h2>
       <input type="email" name="email" placeholder="Email" required />
       <input type="password" name="password" placeholder="Password" required />
-      <!-- <label class="checkbox-label">
-        <input type="checkbox" /> remember ID
-      </label> -->
       <button type="submit">Login</button>
       <p>Don't have an account? <a href="signup.html">Sign up</a></p>
     </form>
@@ -58,6 +55,30 @@
     if (params.get("error") === "1") {
       alert("Login Failed: wrong email or password");
     }
+    
+    window.addEventListener("click", () => {
+      const bgm = document.getElementById("bgm");
+      if (bgm && bgm.paused) {
+        bgm.play().catch(err => console.warn("Autoplay blocked:", err));
+      }
+    }, { once: true });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const bgm = document.getElementById("bgm");
+      const icon = document.getElementById("sound-toggle");
+
+      const isMuted = localStorage.getItem("bgm-muted") === "true";
+
+      if (bgm) {
+        bgm.muted = isMuted;
+        bgm.loop = true;
+        bgm.play().catch(err => console.warn("Autoplay blocked:", err));
+      }
+
+      if (icon) {
+        updateIcon(isMuted);
+      }
+    });
 
     function toggleSound() {
       const bgm = document.getElementById("bgm");
@@ -65,18 +86,20 @@
 
       if (!bgm || !icon) return;
 
-      bgm.muted = !bgm.muted;
+      const newMuted = !bgm.muted;
+      bgm.muted = newMuted;
+      localStorage.setItem("bgm-muted", newMuted);
 
-      if (bgm.muted) {
-        icon.classList.remove("fa-volume-high");
-        icon.classList.add("fa-volume-xmark");
-      } else {
-        icon.classList.remove("fa-volume-xmark");
-        icon.classList.add("fa-volume-high");
-      }
+      updateIcon(newMuted);
+    }
+
+    function updateIcon(muted) {
+      const icon = document.getElementById("sound-toggle");
+      if (!icon) return;
+      icon.classList.remove("fa-volume-high", "fa-volume-xmark");
+      icon.classList.add(muted ? "fa-volume-xmark" : "fa-volume-high");
     }
   </script>
-
 </body>
 
 </html>
