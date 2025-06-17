@@ -27,7 +27,7 @@ The emotions are visualized as colored orbs, and users can track their emotional
 | Frontend     | HTML, CSS, JavaScript (Vanilla)    |
 | Backend      | Node.js, Express                   |
 | Database     | SQLite3                            |
-| Authentication | Passport.js (LocalStrategy)     |
+| Authentication | Passport.js (LocalStrategy), session    |
 | Emotion Analysis | OpenAI GPT API                 |
 | Testing      | Jest, Supertest                    |
 
