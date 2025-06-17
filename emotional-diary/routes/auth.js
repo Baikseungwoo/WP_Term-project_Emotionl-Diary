@@ -20,6 +20,17 @@ router.post("/register",
   ], // used express-validator to validate input
 
 async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        const errorMessages = errors.array().map(err => err.msg).join("\\n");
+        return res.status(400).send(`
+            <script>
+                alert("${errorMessages}");
+                window.location.href = "/signup.html";
+            </script>
+        `);
+    }
+
     const { name, email, password, confirm, phoneNum, birthDate } = req.body;
 
     // Log received form data for debugging (email, password, etc.)
@@ -37,6 +48,7 @@ async (req, res) => {
         `);
     }
 
+    
     try {
         const db = await getDBConnection();
 
@@ -75,11 +87,9 @@ async (req, res) => {
 
 // Login
 router.post("/login",
-[
-    body("email").isEmail().withMessage("Invalid email."),
-    body("password").notEmpty().withMessage("Password is required.")
-  ], // used express-validator to validate input
+
  (req, res, next) => {
+
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
     if (!user) return res.status(401).send("Unauthorized");
