@@ -106,7 +106,7 @@ http://localhost:8080
 ```
 5. visit the live app in browser
 
-[Live Site on Render](https://emotionl-diary.onrender.com)
+  Visit Emotional Diary[https://emotionl-diary.onrender.com](https://emotionl-diary.onrender.com)
 
 
 🌐 You can access our app in internet now.
