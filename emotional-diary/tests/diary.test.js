@@ -2,7 +2,7 @@
 const request = require('supertest');
 const app = require('../app');
 
-// Mock OpenAI 분석 함수
+// Mock the OpenAI emotion analysis service
 jest.mock('../services/openai', () => ({
   analyzeEmotion: jest.fn(() => ({
     keywords: ['sun', 'happy', 'joy'],
@@ -10,7 +10,7 @@ jest.mock('../services/openai', () => ({
   }))
 }));
 
-// Mock DB
+// Mock the database connection and behavior
 jest.mock('../models/db', () => {
   const mockDB = {
     run: jest.fn(),
@@ -23,7 +23,7 @@ jest.mock('../models/db', () => {
         keyword3: 'joy',
         date: '2025-06-07'
       }
-    ])),
+    ])), // Simulate SELECT result
     close: jest.fn()
   };
 
@@ -33,18 +33,22 @@ jest.mock('../models/db', () => {
 });
 
 describe('Diary API Test Suite', () => {
+
+  // Test POST /api/diary route
   describe('POST /api/diary', () => {
+
+     // Should fail with 400 if required fields are missing
     it('should return 400 if missing fields', async () => {
       const res = await request(app).post('/api/diary').send({
         userId: 1,
         content: 'Today was great!'
-        // date가 빠졌음
       });
 
       expect(res.statusCode).toBe(400);
       expect(res.body.error).toBeDefined();
     });
 
+    // Should succeed and return analyzed emotion data
     it('should save diary and return 201', async () => {
       const res = await request(app).post('/api/diary').send({
         userId: 1,
@@ -59,13 +63,17 @@ describe('Diary API Test Suite', () => {
     });
   });
 
+  // Test GET /api/diary route
   describe('GET /api/diary', () => {
+
+    // Should fail with 400 if userId is not provided
     it('should return 400 if userId is missing', async () => {
       const res = await request(app).get('/api/diary');
       expect(res.statusCode).toBe(400);
       expect(res.body.error).toBeDefined();
     });
 
+    // Should return list of diaries for given userId
     it('should return list of diaries for userId', async () => {
       const res = await request(app).get('/api/diary?userId=1');
       expect(res.statusCode).toBe(200);

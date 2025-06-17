@@ -43,15 +43,15 @@ describe('Auth API Test Suite', () => {
         .send({
           name: 'Test',
           email: 'test@example.com',
-          password: '1234',
-          confirm: '5678',
+          password: '123456',
+          confirm: '567899',
           phoneNum: '01012345678',
           birthDate: '2000-01-01'
         });
 
-      expect(res.statusCode).toBe(200);
+      expect(res.statusCode).toBe(400);
       expect(res.text).toContain('Passwords do not match');
-    });
+    }); //because express-validator blocks to 400
 
     it('should fail if email already exists', async () => {
       __mockDB.get.mockResolvedValueOnce({ email: 'test@example.com' });
@@ -61,8 +61,8 @@ describe('Auth API Test Suite', () => {
         .send({
           name: 'Test',
           email: 'test@example.com',
-          password: '1234',
-          confirm: '1234',
+          password: '123456',
+          confirm: '123456',
           phoneNum: '01012345678',
           birthDate: '2000-01-01'
         });
@@ -79,14 +79,14 @@ describe('Auth API Test Suite', () => {
         .send({
           name: 'Test',
           email: 'test@example.com',
-          password: '1234',
-          confirm: '1234',
+          password: '123456',
+          confirm: '123456',
           phoneNum: '01012345678',
           birthDate: '2000-01-01'
         });
 
       expect(res.statusCode).toBe(302); // redirect
-      expect(res.headers.location).toBe('/login.html');
+      expect(res.headers.location).toBe('/login.html?success=1');
     });
   });
 
