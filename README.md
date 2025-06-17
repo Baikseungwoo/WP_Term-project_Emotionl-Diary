@@ -100,12 +100,16 @@ OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 node server.js
 ```
-4. visit the app in your browser
+4. visit the app in your local
 ```
 http://localhost:8080
 ```
+5. visit the live app in browser
 
-🌐 The app should now be running locally.
+- Visit Emotional Diary: [https://emotionl-diary.onrender.com](https://emotionl-diary.onrender.com)
+
+
+🌐 You can access our app in internet now.
 
 
 ## 🔐 Environment Variables
