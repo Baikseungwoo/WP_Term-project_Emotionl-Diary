@@ -7,6 +7,8 @@ A full-stack emotional diary web application that lets users write journal entri
 The emotions are visualized as colored orbs, and users can track their emotional patterns through a "mood shelf" UI.
 
 ---
+<img width="482" height="639" alt="image" src="https://github.com/user-attachments/assets/2fdb07b5-afa3-4442-9c3e-07c1275958b0" />
+
 
 ## ✨ Features
 
